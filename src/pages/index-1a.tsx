@@ -1,0 +1,34 @@
+import Head from "next/head";
+import Title from '../components/Title';
+import {getProducts} from '../lib/product';
+
+export type IProduct = {
+  id: number;
+  title: string;
+}
+
+export type HomePageProps = {
+  products: IProduct[];
+}
+export async function getStaticProps() {
+  const products = await getProducts();
+  return {
+    props: { products }
+  }
+}
+export default function HomePage({ products }: HomePageProps) {
+  console.log('[HomePage] render', products);
+  return (
+    <>
+      <Head>
+        <title>Next Shop</title>
+      </Head>
+      <main>
+        <Title>Next Shop</Title>
+      </main>
+      <ul>
+        {products.map((product: IProduct) => <li key={product.id}>{product.title}</li>)}
+      </ul>
+    </>
+  );
+}

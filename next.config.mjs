@@ -3,4 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
+nextConfig.images = { domains: ["localhost"] };
+
 export default nextConfig;
